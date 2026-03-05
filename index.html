@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Render App</title>
+
+    <style>
+        body{
+            margin:0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg,#6a11cb,#2575fc);
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .container{
+            text-align:center;
+            background:rgba(0,0,0,0.2);
+            padding:40px;
+            border-radius:15px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1{
+            font-size:40px;
+            margin-bottom:10px;
+        }
+
+        p{
+            font-size:18px;
+            opacity:0.9;
+        }
+
+        button{
+            margin-top:20px;
+            padding:12px 25px;
+            border:none;
+            border-radius:8px;
+            background:white;
+            color:#2575fc;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            transform:scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🚀 Hello from Render</h1>
+    <p>Your website is successfully deployed!</p>
+
+    <button onclick="alert('It works! 🎉')">
+        Click Me
+    </button>
+</div>
+
+</body>
+</html>
