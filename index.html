@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Two Sample T-Test App</title>
+<title>Two Sample T-Test Calculator</title>
 
 <style>
 
@@ -12,86 +13,98 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
 body{
-height:100vh;
+background:#f4f6f9;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#6a11cb,#2575fc);
-color:white;
+height:100vh;
+color:#333;
 }
 
 .container{
-text-align:center;
-background:rgba(0,0,0,0.25);
-padding:50px 60px;
-border-radius:18px;
-backdrop-filter:blur(12px);
-box-shadow:0 10px 35px rgba(0,0,0,0.3);
-max-width:450px;
-width:100%;
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+width:420px;
 }
 
 h1{
-font-size:36px;
-margin-bottom:12px;
-letter-spacing:1px;
+font-size:22px;
+margin-bottom:8px;
+font-weight:600;
 }
 
-p{
-font-size:16px;
-opacity:0.9;
-margin-bottom:15px;
-}
-
-input, select{
-width:100%;
-padding:12px;
-margin:8px 0;
-border:none;
-border-radius:8px;
+.subtitle{
 font-size:14px;
+color:#666;
+margin-bottom:25px;
+}
+
+label{
+font-size:13px;
+font-weight:600;
+color:#444;
+display:block;
+margin-bottom:5px;
+margin-top:12px;
+}
+
+input,select{
+width:100%;
+padding:10px;
+border:1px solid #ddd;
+border-radius:6px;
+font-size:14px;
+transition:0.2s;
+}
+
+input:focus,select:focus{
+outline:none;
+border-color:#4f46e5;
 }
 
 button{
-padding:14px 28px;
-border:none;
-border-radius:10px;
-background:white;
-color:#2575fc;
-font-weight:bold;
-font-size:15px;
-cursor:pointer;
-transition:all 0.25s ease;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
 width:100%;
-margin-top:10px;
+margin-top:20px;
+padding:12px;
+border:none;
+background:#4f46e5;
+color:white;
+border-radius:6px;
+font-weight:600;
+font-size:14px;
+cursor:pointer;
+transition:0.2s;
 }
 
 button:hover{
-transform:translateY(-3px) scale(1.05);
-box-shadow:0 8px 20px rgba(0,0,0,0.35);
-}
-
-button:active{
-transform:scale(0.98);
+background:#4338ca;
 }
 
 .result{
-margin-top:18px;
-padding:12px;
-background:rgba(255,255,255,0.15);
-border-radius:8px;
-font-size:16px;
+margin-top:20px;
+padding:18px;
+background:#f7f8fb;
+border-radius:6px;
+font-size:14px;
+line-height:1.7;
+}
+
+.decision{
+margin-top:10px;
+font-weight:600;
 }
 
 .footer{
-margin-top:20px;
-font-size:13px;
-opacity:0.7;
+text-align:center;
+font-size:12px;
+margin-top:18px;
+color:#888;
 }
 
 </style>
@@ -102,13 +115,15 @@ opacity:0.7;
 
 <div class="container">
 
-<h1>📊 Two Sample T-Test</h1>
-<p>Enter numbers separated by commas</p>
+<h1>Two Sample T-Test</h1>
+<p class="subtitle">Compare whether two datasets have significantly different means</p>
 
-<input id="sample1" placeholder="Sample 1 (e.g. 10,12,14,16)">
-<input id="sample2" placeholder="Sample 2 (e.g. 9,11,13,15)">
+<label>Sample 1</label> <input id="sample1" placeholder="Example: 10,12,14,16">
 
-<select id="alternative">
+<label>Sample 2</label> <input id="sample2" placeholder="Example: 9,11,13,15">
+
+<label>Alternative Hypothesis</label> <select id="alternative">
+
 <option value="two-sided">Two-Sided Test</option>
 <option value="left">Left-Tailed Test</option>
 <option value="right">Right-Tailed Test</option>
@@ -121,7 +136,7 @@ Enter values and click Run T-Test
 </div>
 
 <div class="footer">
-Powered by Python • NumPy • SciPy • Flask
+Two Sample T-Test • Python • NumPy • SciPy
 </div>
 
 </div>
@@ -153,9 +168,20 @@ alternative:alt
 
 let result=await response.json()
 
+let decision=""
+let alpha=0.05
+
+if(result.p_value < alpha){
+decision="Reject the Null Hypothesis (significant difference)"
+}
+else{
+decision="Fail to Reject the Null Hypothesis"
+}
+
 document.getElementById("result").innerHTML=
-"T-value: "+result.t_calculated.toFixed(4)+"<br>"+
-"P-value: "+result.p_value.toFixed(4)
+"<strong>T Statistic:</strong> "+result.t_calculated.toFixed(4)+"<br>"+
+"<strong>P Value:</strong> "+result.p_value.toFixed(4)+"<br>"+
+"<div class='decision'>Decision: "+decision+"</div>"
 
 }
 
