@@ -2,7 +2,7 @@ import numpy as np
 from scipy.stats import t
 from statistics import stdev
 from scipy import stats
-from flask import Flask
+from flask import Flask, send_from_directory
 
 app = Flask(__name__)
 
@@ -45,7 +45,7 @@ def two_sample(a, b, alternative):
 
 @app.route("/")
 def home():
-    return "Two Sample T-Test App is Running!"
+    return send_from_directory(".", "index.html")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
