@@ -1,67 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Render App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Render App</title>
 
-    <style>
-        body{
-            margin:0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg,#6a11cb,#2575fc);
-            color:white;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-        }
+<style>
 
-        .container{
-            text-align:center;
-            background:rgba(0,0,0,0.2);
-            padding:40px;
-            border-radius:15px;
-            backdrop-filter: blur(10px);
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
 
-        h1{
-            font-size:40px;
-            margin-bottom:10px;
-        }
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#6a11cb,#2575fc);
+color:white;
+}
 
-        p{
-            font-size:18px;
-            opacity:0.9;
-        }
+.container{
+text-align:center;
+background:rgba(0,0,0,0.25);
+padding:50px 60px;
+border-radius:18px;
+backdrop-filter:blur(12px);
+box-shadow:0 10px 35px rgba(0,0,0,0.3);
+max-width:450px;
+}
 
-        button{
-            margin-top:20px;
-            padding:12px 25px;
-            border:none;
-            border-radius:8px;
-            background:white;
-            color:#2575fc;
-            font-weight:bold;
-            cursor:pointer;
-            transition:0.3s;
-        }
+h1{
+font-size:42px;
+margin-bottom:12px;
+letter-spacing:1px;
+}
 
-        button:hover{
-            transform:scale(1.05);
-        }
-    </style>
+p{
+font-size:18px;
+opacity:0.9;
+margin-bottom:25px;
+}
+
+button{
+padding:14px 28px;
+border:none;
+border-radius:10px;
+background:white;
+color:#2575fc;
+font-weight:bold;
+font-size:15px;
+cursor:pointer;
+transition:all 0.25s ease;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:hover{
+transform:translateY(-3px) scale(1.05);
+box-shadow:0 8px 20px rgba(0,0,0,0.35);
+}
+
+button:active{
+transform:scale(0.98);
+}
+
+.footer{
+margin-top:25px;
+font-size:13px;
+opacity:0.7;
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="container">
-    <h1>🚀 Hello from Render</h1>
-    <p>Your website is successfully deployed!</p>
 
-    <button onclick="alert('It works! 🎉')">
-        Click Me
-    </button>
+<h1>🚀 Hello from Render</h1>
+<p>Your website is successfully deployed!</p>
+
+<button onclick="alert('It works! 🎉')">
+Click Me
+</button>
+
+<div class="footer">
+Powered by Render
+</div>
+
 </div>
 
 </body>
