@@ -1,12 +1,12 @@
 import numpy as np
 from scipy.stats import t
 from statistics import stdev
-from scipy import stats
-from flask import Flask, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory
 
 app = Flask(__name__)
 
 def two_sample(a, b, alternative):
+
     xbar1 = np.mean(a)
     xbar2 = np.mean(b)
 
@@ -36,16 +36,31 @@ def two_sample(a, b, alternative):
         p_value = None
 
     return {
-        "t_calculated": tcal,
-        "t_table_positive": t_table_pos,
-        "t_table_negative": t_table_neg,
-        "p_value": p_value
+        "t_calculated": float(tcal),
+        "t_table_positive": float(t_table_pos),
+        "t_table_negative": float(t_table_neg),
+        "p_value": float(p_value)
     }
 
 
 @app.route("/")
 def home():
     return send_from_directory(".", "index.html")
+
+
+@app.route("/calculate", methods=["POST"])
+def calculate():
+
+    data = request.get_json()
+
+    sample1 = data["sample1"]
+    sample2 = data["sample2"]
+    alternative = data["alternative"]
+
+    result = two_sample(sample1, sample2, alternative)
+
+    return jsonify(result)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
